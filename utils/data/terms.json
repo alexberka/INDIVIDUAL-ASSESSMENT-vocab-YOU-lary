@@ -4,7 +4,7 @@
     "term": "git log",
     "definition": "Show the commit history for the currently active branch",
     "category_id": "-NsB29bUMvdAAT5qH9nD",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2024-01-17 21:50:51",
     "public": false
   },
@@ -13,7 +13,7 @@
     "term": "git status",
     "definition": "Show modified files in working directory, staged for your next commit",
     "category_id": "-NsB29bUMvdAAT5qH9nD",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2024-02-11 03:14:19",
     "public": true
   },
@@ -22,7 +22,7 @@
     "term": "git init",
     "definition": "Initialize an existing directory as a Git repository",
     "category_id": "-NsB29bUMvdAAT5qH9nD",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2023-12-13 09:51:03",
     "public": true
   },
@@ -31,7 +31,7 @@
     "term": "git reset [file]",
     "definition": "Unstage a file while retaining the changes in working directory",
     "category_id": "-NsB29bUMvdAAT5qH9nD",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2023-11-06 05:51:44",
     "public": true
   },
@@ -40,7 +40,7 @@
     "term": "element.class selector",
     "definition": "Select all <element> with <class>",
     "category_id": "-NsB29bT4NVxNcXHNcQJ",
-    "uid": "",
+    "uid": "HdpbmavF9rUcWUQTZGKxSqGPcN83",
     "created": "2023-10-21 16:51:35",
     "public": false
   },
@@ -49,7 +49,7 @@
     "term": "element1+element2 selector",
     "definition": "Select first <element2> immediately after <element1> instances",
     "category_id": "-NsB29bT4NVxNcXHNcQJ",
-    "uid": "",
+    "uid": "HdpbmavF9rUcWUQTZGKxSqGPcN83",
     "created": "2023-10-18 20:04:27",
     "public": false
   },
@@ -58,7 +58,7 @@
     "term": "z-index",
     "definition": "Specifies the stack order of an element (stacks positive to negative)",
     "category_id": "-NsB29bT4NVxNcXHNcQJ",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2024-01-04 04:03:33",
     "public": false
   },
@@ -67,7 +67,7 @@
     "term": "animation-iteration-count",
     "definition": "Specifies the number of times an animation should run",
     "category_id": "-NsB29bT4NVxNcXHNcQJ",
-    "uid": "",
+    "uid": "HdpbmavF9rUcWUQTZGKxSqGPcN83",
     "created": "2023-10-20 12:12:16",
     "public": false
   },
@@ -76,7 +76,7 @@
     "term": "!important rule",
     "definition": "Overrides all previous styling rules for specific property of selected element",
     "category_id": "-NsB29bT4NVxNcXHNcQJ",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2023-12-06 17:34:57",
     "public": false
   },
@@ -85,16 +85,16 @@
     "term": "list-style-type",
     "definition": "Specifies the type of the item marker in an ordered or unordered list",
     "category_id": "-NsB29bT4NVxNcXHNcQJ",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2023-11-27 00:55:38",
     "public": true
   },
   "-NsB0obRwNb_n-3u3-Jp": {
     "firebaseKey": "-NsB0obRwNb_n-3u3-Jp",
     "term": "text-decoration",
-    "definition": "Shorthand to specify text decoration in format [-line (-color) (-style) (-thickness)",
+    "definition": "Shorthand to specify text decoration in format [-line (-color) (-style) (-thickness)]",
     "category_id": "-NsB29bT4NVxNcXHNcQJ",
-    "uid": "",
+    "uid": "HdpbmavF9rUcWUQTZGKxSqGPcN83",
     "created": "2023-11-18 16:57:30",
     "public": false
   },
@@ -103,7 +103,7 @@
     "term": "lambda function",
     "definition": "A small anonymous function that can take any number of arguments [ex: x = lambda a, b : a + b; x(7, 3) = 10]",
     "category_id": "-NsB29bT4NVxNcXHNcQL",
-    "uid": "",
+    "uid": "HdpbmavF9rUcWUQTZGKxSqGPcN83",
     "created": "2023-11-12 06:04:43",
     "public": true
   },
@@ -112,7 +112,7 @@
     "term": "tuple",
     "definition": "An ordered, unchangeable data type used to store multiple items in a single variable [ex: tuple = (item1, item2, item3)]",
     "category_id": "-NsB29bT4NVxNcXHNcQL",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2024-01-17 22:07:07",
     "public": false
   },
@@ -121,7 +121,7 @@
     "term": "<strong></strong>",
     "definition": "Tag used to add importance to content within",
     "category_id": "-NsB29bSbmwBgOOW5XvK",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2023-11-19 19:45:45",
     "public": true
   },
@@ -130,7 +130,7 @@
     "term": "<button></button>",
     "definition": "Tag used to define a clickable button",
     "category_id": "-NsB29bSbmwBgOOW5XvK",
-    "uid": "",
+    "uid": "HdpbmavF9rUcWUQTZGKxSqGPcN83",
     "created": "2024-01-28 07:54:26",
     "public": false
   },
@@ -139,7 +139,7 @@
     "term": "<figcaption></figcaption>",
     "definition": "Tag used to define a caption within <figure> element",
     "category_id": "-NsB29bSbmwBgOOW5XvK",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2024-02-24 16:57:47",
     "public": true
   },
@@ -148,7 +148,7 @@
     "term": "Array.isArray()",
     "definition": "Determines whether passed value is an Array, returns boolean",
     "category_id": "-NsB29bT4NVxNcXHNcQK",
-    "uid": "",
+    "uid": "HdpbmavF9rUcWUQTZGKxSqGPcN83",
     "created": "2023-10-28 22:05:35",
     "public": false
   },
@@ -157,7 +157,7 @@
     "term": "Array.prototype.slice(start, end)",
     "definition": "Returns new array containing shallow copy of array from index start (inclusive) to index end (noninclusive)",
     "category_id": "-NsB29bT4NVxNcXHNcQK",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2024-01-28 15:34:16",
     "public": false
   },
@@ -166,7 +166,7 @@
     "term": "Array.prototype.toReversed()",
     "definition": "Returns new array with elements of initial array in reversed order",
     "category_id": "-NsB29bT4NVxNcXHNcQK",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2023-12-04 17:17:53",
     "public": true
   },
@@ -175,7 +175,7 @@
     "term": "Math.pow(x, y)",
     "definition": "Returns value of x raised to the power of y",
     "category_id": "-NsB29bT4NVxNcXHNcQK",
-    "uid": "",
+    "uid": "KJ2kyyEf6ce9QHl2O3hGhlXDPUx2",
     "created": "2023-10-30 19:29:24",
     "public": true
   }
