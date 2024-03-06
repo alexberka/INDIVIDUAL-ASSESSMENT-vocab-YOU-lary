@@ -16,6 +16,7 @@ const startApp = (uid) => {
   logoutButton();
 
   getTerms(uid).then((data) => showTerms(data, uid));
+  document.body.id = 'terms..az..all';
 };
 
 export default startApp;
