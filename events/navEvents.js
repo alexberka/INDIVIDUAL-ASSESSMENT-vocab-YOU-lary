@@ -1,4 +1,4 @@
-import getTerms from '../api/terms';
+import { getTerms } from '../api/terms';
 import showTerms from '../pages/termsDisplay';
 
 const navEvents = (uid) => {

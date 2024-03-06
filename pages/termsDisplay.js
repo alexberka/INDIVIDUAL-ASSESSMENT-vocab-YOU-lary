@@ -5,7 +5,7 @@ import renderToDom from '../utils/renderToDom';
 const showTerms = async (terms, uid) => {
   let termsHTML = '';
   const categories = await getCategories();
-  const [, , filterBy] = document.body.id.split('..');
+  const [, sortBy, filterBy] = document.body.id.split('..');
 
   let buttonsHTML = `
     <div class="dropdown">
@@ -19,8 +19,28 @@ const showTerms = async (terms, uid) => {
   });
   buttonsHTML += '</ul></div>';
 
-  if (terms.length) {
-    terms.forEach((term) => {
+  let dispTerms = terms;
+
+  if (filterBy !== 'all') {
+    dispTerms = terms.filter((t) => t.category_id === filterBy);
+  }
+
+  if (sortBy === 'az' || sortBy === 'za') {
+    dispTerms.sort((a, b) => {
+      const first = a.term.replace(/\W/g, '').toUpperCase();
+      const second = b.term.replace(/\W/g, '').toUpperCase();
+      if (first >= second) {
+        return 1;
+      // eslint-disable-next-line no-else-return
+      } else {
+        return -1;
+      }
+    });
+    if (sortBy === 'za') { dispTerms.reverse(); }
+  }
+
+  if (dispTerms.length) {
+    dispTerms.forEach((term) => {
       termsHTML += `
         <div class="card" style="width: 18rem;">
           <div class="card-body">
