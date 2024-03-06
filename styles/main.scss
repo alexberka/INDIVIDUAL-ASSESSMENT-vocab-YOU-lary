@@ -8,3 +8,59 @@ body {
   text-align: center;
   margin-top: 100px;
 }
+
+#display-region {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.card {
+  margin-top: 0;
+  margin-bottom: auto;
+}
+
+.card-body {
+  padding: 10px 10px 5px 10px;
+}
+
+.term-data {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  .term-data-right {
+    display: flex;
+  }
+  .public:hover::after {
+    content: "  Toggle visibility";
+    font-size: 0.8rem;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.term-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 8px;
+  .timestamp {
+    font-size: 0.5rem;
+    text-align: right;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.term-name {
+  color: black;
+  text-decoration: none;
+}
