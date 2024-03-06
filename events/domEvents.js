@@ -1,11 +1,21 @@
-const domEvents = () => {
+import getTerms from '../api/terms';
+import showTerms from '../pages/termsDisplay';
+
+const domEvents = (uid) => {
   document.querySelector('#button-bar').addEventListener('click', (e) => {
     if (e.target.id.includes('sort-terms-by')) {
       console.warn('Sorting terms');
     }
 
     if (e.target.id.includes('filter-terms-by')) {
-      console.warn('Filtering terms');
+      const [, category] = e.target.id.split('--');
+      const [a, b] = document.body.id.split('..');
+      document.body.id = `${a}..${b}..${category}`;
+      if (category === 'all') {
+        getTerms(uid).then((data) => showTerms(data, uid));
+      } else {
+        getTerms(uid).then((data) => showTerms(data.filter((t) => t.category_id === category), uid));
+      }
     }
   });
 

@@ -5,6 +5,20 @@ import renderToDom from '../utils/renderToDom';
 const showTerms = async (terms, uid) => {
   let termsHTML = '';
   const categories = await getCategories();
+  const [, , filterBy] = document.body.id.split('..');
+
+  let buttonsHTML = `
+    <div class="dropdown">
+      <button class="btn ${filterBy === 'all' ? 'btn-outline-dark' : 'btn-dark'} dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        ${filterBy === 'all' ? 'Filter By' : categories.find((cat) => cat.firebaseKey === filterBy).category}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a id="filter-terms-by--all" class="dropdown-item" href="#">All</a></li>`;
+  categories.forEach((cat) => {
+    buttonsHTML += `<li><a id="filter-terms-by--${cat.firebaseKey}" class="dropdown-item" href="#">${cat.category}</a></li>`;
+  });
+  buttonsHTML += '</ul></div>';
+
   if (terms.length) {
     terms.forEach((term) => {
       termsHTML += `
@@ -33,6 +47,7 @@ const showTerms = async (terms, uid) => {
     });
   }
 
+  renderToDom('#button-bar', buttonsHTML);
   renderToDom('#display-region', termsHTML);
 };
 

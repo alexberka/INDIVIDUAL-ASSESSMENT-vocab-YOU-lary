@@ -7,6 +7,7 @@ const navEvents = (uid) => {
       console.warn('Switching to new term tab');
     }
     if (e.target.id.includes('terms-tab')) {
+      document.body.id = 'terms..az..all';
       getTerms(uid).then((data) => showTerms(data, uid));
     }
     if (e.target.id.includes('categories-tab')) {
