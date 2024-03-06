@@ -1,5 +1,6 @@
-import getTerms from '../api/terms';
+import { getTerms, deleteTerm } from '../api/terms';
 import showTerms from '../pages/termsDisplay';
+import { unescape } from '../utils/escape';
 
 const domEvents = (uid) => {
   document.querySelector('#button-bar').addEventListener('click', (e) => {
@@ -8,24 +9,28 @@ const domEvents = (uid) => {
     }
 
     if (e.target.id.includes('filter-terms-by')) {
-      const [, category] = e.target.id.split('--');
-      const [a, b] = document.body.id.split('..');
-      document.body.id = `${a}..${b}..${category}`;
-      if (category === 'all') {
-        getTerms(uid).then((data) => showTerms(data, uid));
-      } else {
-        getTerms(uid).then((data) => showTerms(data.filter((t) => t.category_id === category), uid));
-      }
+      const [, filterBy] = e.target.id.split('--');
+      const [a, sortBy] = document.body.id.split('..');
+      document.body.id = `${a}..${sortBy}..${filterBy}`;
+      getTerms(uid).then((data) => showTerms(data, uid));
     }
   });
 
   document.querySelector('#display-region').addEventListener('click', (e) => {
     if (e.target.id.includes('edit-term')) {
+      // const [, firebaseKey] = e.target.id.split('--');
       console.warn('Editing chosen term');
     }
 
     if (e.target.id.includes('delete-term')) {
-      console.warn('Deleting chosen term');
+      const [, firebaseKey] = e.target.id.split('--');
+      const termTitle = document.querySelector(`#term-title-${firebaseKey}`).innerHTML;
+      // eslint-disable-next-line no-alert
+      if (window.confirm(`Delete \n ${unescape(termTitle)} \nfrom collection?`)) {
+        deleteTerm(firebaseKey).then(() => {
+          getTerms(uid).then((data) => showTerms(data, uid));
+        });
+      }
     }
 
     if (e.target.id.includes('vis-toggle')) {

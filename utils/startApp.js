@@ -1,4 +1,4 @@
-import getTerms from '../api/terms';
+import { getTerms } from '../api/terms';
 import logoutButton from '../components/buttons/logoutButton';
 import domBuilder from '../components/shared/domBuilder';
 import navBar from '../components/shared/navBar';
@@ -15,8 +15,8 @@ const startApp = (uid) => {
   navEvents(uid);
   logoutButton();
 
-  getTerms(uid).then((data) => showTerms(data, uid));
   document.body.id = 'terms..az..all';
+  getTerms(uid).then((data) => showTerms(data, uid));
 };
 
 export default startApp;

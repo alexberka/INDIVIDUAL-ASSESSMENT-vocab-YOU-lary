@@ -1,11 +1,11 @@
 import { getCategories } from '../api/categories';
-import escape from '../utils/escape';
+import { escape } from '../utils/escape';
 import renderToDom from '../utils/renderToDom';
 
 const showTerms = async (terms, uid) => {
   let termsHTML = '';
   const categories = await getCategories();
-  const [, , filterBy] = document.body.id.split('..');
+  const [, sortBy, filterBy] = document.body.id.split('..');
 
   let buttonsHTML = `
     <div class="dropdown">
@@ -19,8 +19,28 @@ const showTerms = async (terms, uid) => {
   });
   buttonsHTML += '</ul></div>';
 
-  if (terms.length) {
-    terms.forEach((term) => {
+  let dispTerms = terms;
+
+  if (filterBy !== 'all') {
+    dispTerms = terms.filter((t) => t.category_id === filterBy);
+  }
+
+  if (sortBy === 'az' || sortBy === 'za') {
+    dispTerms.sort((a, b) => {
+      const first = a.term.replace(/\W/g, '').toUpperCase();
+      const second = b.term.replace(/\W/g, '').toUpperCase();
+      if (first >= second) {
+        return 1;
+      // eslint-disable-next-line no-else-return
+      } else {
+        return -1;
+      }
+    });
+    if (sortBy === 'za') { dispTerms.reverse(); }
+  }
+
+  if (dispTerms.length) {
+    dispTerms.forEach((term) => {
       termsHTML += `
         <div class="card" style="width: 18rem;">
           <div class="card-body">
@@ -29,7 +49,7 @@ const showTerms = async (terms, uid) => {
               <p>${categories.find((cat) => cat.firebaseKey === term.category_id).category}</p>
             </div>
             <h6>
-              <a class="term-name" type="button" data-bs-toggle="collapse" data-bs-target="#${term.firebaseKey}-collapse" aria-expanded="false" aria-controls="collapseExample">
+              <a id="term-title-${term.firebaseKey}" class="term-name" type="button" data-bs-toggle="collapse" data-bs-target="#${term.firebaseKey}-collapse" aria-expanded="false" aria-controls="collapseExample">
                 ${escape(term.term)}
               </a>
             </h6>
