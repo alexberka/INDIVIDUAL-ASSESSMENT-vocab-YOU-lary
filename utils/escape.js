@@ -4,4 +4,10 @@ const escape = (str) => str
   .replace(/\[/g, '&#91')
   .replace(/\]/g, '&#93');
 
-export default escape;
+const unescape = (str) => str
+  .replace(/&lt;/g, '<')
+  .replace(/&gt;/g, '>')
+  .replace(/&#91/g, '[')
+  .replace(/&#93/g, ']');
+
+export { escape, unescape };

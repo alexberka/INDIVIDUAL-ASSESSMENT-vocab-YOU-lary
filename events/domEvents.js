@@ -1,5 +1,6 @@
-import { getTerms, getSingleTerm, deleteTerm } from '../api/terms';
+import { getTerms, deleteTerm } from '../api/terms';
 import showTerms from '../pages/termsDisplay';
+import { unescape } from '../utils/escape';
 
 const domEvents = (uid) => {
   document.querySelector('#button-bar').addEventListener('click', (e) => {
@@ -23,14 +24,13 @@ const domEvents = (uid) => {
 
     if (e.target.id.includes('delete-term')) {
       const [, firebaseKey] = e.target.id.split('--');
-      getSingleTerm(firebaseKey).then((term) => {
-        // eslint-disable-next-line no-alert
-        if (window.confirm(`Delete "${term.term}" from collection?`)) {
-          deleteTerm(firebaseKey).then(() => {
-            getTerms(uid).then((data) => showTerms(data, uid));
-          });
-        }
-      });
+      const termTitle = document.querySelector(`#term-title-${firebaseKey}`).innerHTML;
+      // eslint-disable-next-line no-alert
+      if (window.confirm(`Delete \n ${unescape(termTitle)} \nfrom collection?`)) {
+        deleteTerm(firebaseKey).then(() => {
+          getTerms(uid).then((data) => showTerms(data, uid));
+        });
+      }
     }
 
     if (e.target.id.includes('vis-toggle')) {

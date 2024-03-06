@@ -1,5 +1,5 @@
 import { getCategories } from '../api/categories';
-import escape from '../utils/escape';
+import { escape } from '../utils/escape';
 import renderToDom from '../utils/renderToDom';
 
 const showTerms = async (terms, uid) => {
@@ -49,7 +49,7 @@ const showTerms = async (terms, uid) => {
               <p>${categories.find((cat) => cat.firebaseKey === term.category_id).category}</p>
             </div>
             <h6>
-              <a class="term-name" type="button" data-bs-toggle="collapse" data-bs-target="#${term.firebaseKey}-collapse" aria-expanded="false" aria-controls="collapseExample">
+              <a id="term-title-${term.firebaseKey}" class="term-name" type="button" data-bs-toggle="collapse" data-bs-target="#${term.firebaseKey}-collapse" aria-expanded="false" aria-controls="collapseExample">
                 ${escape(term.term)}
               </a>
             </h6>
