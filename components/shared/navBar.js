@@ -24,6 +24,12 @@ const navBar = () => {
             </li>
           </ul>
           <span class="navbar-text">
+            <input
+              class="form-control mr-sm-2"
+              id="search"
+              placeholder="Search Terms"
+              aria-label="Search"
+            />
             <div id="logout-button"></div>
           </span>
         </div>

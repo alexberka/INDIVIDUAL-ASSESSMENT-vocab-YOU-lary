@@ -3,7 +3,7 @@ import client from '../utils/client';
 const endpoint = client.databaseURL;
 
 const getTerms = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/terms.json?orderBy="uid"&equalTo="${uid}"`, {
+  fetch(`${endpoint}/terms.json${uid ? `?orderBy="uid"&equalTo="${uid}"` : ''}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
