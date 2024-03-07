@@ -2,7 +2,7 @@ import { getCategories } from '../api/categories';
 import clearDom from '../utils/clearDom';
 import { escape } from '../utils/escape';
 import renderToDom from '../utils/renderToDom';
-import { azSortTerm } from '../utils/sort';
+import { azSortCategory, azSortTerm, dateSortTerm } from '../utils/sort';
 
 const showTerms = async (terms, uid) => {
   clearDom();
@@ -13,13 +13,41 @@ const showTerms = async (terms, uid) => {
 
   let buttonsHTML = `
     <div class="dropdown">
-      <button class="btn ${filterBy === 'all' ? 'btn-outline-dark' : 'btn-dark'} dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        ${filterBy === 'all' ? 'Filter By' : categories.find((cat) => cat.firebaseKey === filterBy).category}
+      <button class="btn btn-dark dropdown-toggle" type="button" id="filterByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        ${filterBy === 'all' ? 'All' : categories.find((cat) => cat.firebaseKey === filterBy).category}
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a id="filter-terms-by--all" class="dropdown-item" href="#">All</a></li>`;
-  categories.forEach((cat) => {
-    buttonsHTML += `<li><a id="filter-terms-by--${cat.firebaseKey}" class="dropdown-item" href="#">${cat.category}</a></li>`;
+      <ul class="dropdown-menu" aria-labelledby="filterByDropdown">
+        <li><a class="dropdown-item disabled"><strong>Select Category</strong></a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a id="filter-terms-by--all" class="dropdown-item" href="#">All (default)</a></li>`;
+  categories.sort(azSortCategory).forEach((cat) => {
+    buttonsHTML += `
+      <li>
+        <a id="filter-terms-by--${cat.firebaseKey}" class="dropdown-item" href="#">${cat.category}</a>
+      </li>`;
+  });
+  buttonsHTML += '</ul></div>';
+
+  const sortOptions = [
+    { key: 'az', vis: 'A - Z' },
+    { key: 'za', vis: 'Z - A' },
+    { key: 'new', vis: 'Newest First' },
+    { key: 'old', vis: 'Oldest First' }
+  ];
+
+  buttonsHTML += `
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="sortByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        ${sortOptions.find((sort) => sort.key === sortBy).vis}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="sortByDropdown">
+        <li><a class="dropdown-item disabled"><strong>Sort Method</strong></a></li>
+        <li><hr class="dropdown-divider"></li>`;
+  sortOptions.forEach((sort) => {
+    buttonsHTML += `
+      <li>
+        <a id="sort-terms-by--${sort.key}" class="dropdown-item" href="#">${sort.vis}</a>
+      </li>`;
   });
   buttonsHTML += '</ul></div>';
 
@@ -32,6 +60,9 @@ const showTerms = async (terms, uid) => {
   if (sortBy === 'az' || sortBy === 'za') {
     dispTerms.sort(azSortTerm);
     if (sortBy === 'za') { dispTerms.reverse(); }
+  } else if (sortBy === 'new' || sortBy === 'old') {
+    dispTerms.sort(dateSortTerm);
+    if (sortBy === 'old') { dispTerms.reverse(); }
   }
 
   if (dispTerms.length) {
@@ -55,7 +86,7 @@ const showTerms = async (terms, uid) => {
             </div>
             <div class="term-footer">
               ${term.uid !== uid ? `<p id="copy-to-user--${term.firebaseKey}" class="clickable">Copy To Collection</p>` : `<p id="edit-term--${term.firebaseKey}" class="clickable">Edit</p><p id="delete-term--${term.firebaseKey}" class="clickable">Delete</p>`}
-              <p class="timestamp">Last Edited: ${term.created}</p>
+              <p class="timestamp">Created: ${term.created}</p>
             </div>
           </div>
         </div>`;
