@@ -21,7 +21,11 @@ const formEvents = (uid) => {
       createTerm(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateTerm(patchPayload).then(
-          getTerms(uid).then((data) => showTerms(data, uid))
+          getTerms(uid).then((data) => {
+            const [a, b] = document.body.id.split('..');
+            document.body.id = `${a}..${b}..all`;
+            showTerms(data, uid);
+          })
         );
       });
     }
@@ -41,7 +45,11 @@ const formEvents = (uid) => {
       };
 
       updateTerm(patchPayload).then(
-        getTerms(uid).then((data) => showTerms(data, uid))
+        getTerms(uid).then((data) => {
+          const [a, b] = document.body.id.split('..');
+          document.body.id = `${a}..${b}..all`;
+          showTerms(data, uid);
+        })
       );
     }
 
