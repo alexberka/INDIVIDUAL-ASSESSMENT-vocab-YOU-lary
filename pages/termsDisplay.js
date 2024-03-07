@@ -1,8 +1,12 @@
 import { getCategories } from '../api/categories';
+import clearDom from '../utils/clearDom';
 import { escape } from '../utils/escape';
 import renderToDom from '../utils/renderToDom';
+import { azSortTerm } from '../utils/sort';
 
 const showTerms = async (terms, uid) => {
+  clearDom();
+
   let termsHTML = '';
   const categories = await getCategories();
   const [, sortBy, filterBy] = document.body.id.split('..');
@@ -26,16 +30,7 @@ const showTerms = async (terms, uid) => {
   }
 
   if (sortBy === 'az' || sortBy === 'za') {
-    dispTerms.sort((a, b) => {
-      const first = a.term.replace(/\W/g, '').toUpperCase();
-      const second = b.term.replace(/\W/g, '').toUpperCase();
-      if (first >= second) {
-        return 1;
-      // eslint-disable-next-line no-else-return
-      } else {
-        return -1;
-      }
-    });
+    dispTerms.sort(azSortTerm);
     if (sortBy === 'za') { dispTerms.reverse(); }
   }
 
@@ -60,7 +55,7 @@ const showTerms = async (terms, uid) => {
             </div>
             <div class="term-footer">
               ${term.uid !== uid ? `<p id="copy-to-user--${term.firebaseKey}" class="clickable">Copy To Collection</p>` : `<p id="edit-term--${term.firebaseKey}" class="clickable">Edit</p><p id="delete-term--${term.firebaseKey}" class="clickable">Delete</p>`}
-              <p class="timestamp">Created on: ${term.created}</p>
+              <p class="timestamp">Last Edited: ${term.created}</p>
             </div>
           </div>
         </div>`;

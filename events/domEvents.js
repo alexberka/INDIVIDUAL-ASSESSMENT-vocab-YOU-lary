@@ -1,4 +1,5 @@
-import { getTerms, deleteTerm } from '../api/terms';
+import { getTerms, deleteTerm, getSingleTerm } from '../api/terms';
+import addTermForm from '../components/forms/addTermForm';
 import showTerms from '../pages/termsDisplay';
 import { unescape } from '../utils/escape';
 
@@ -18,8 +19,8 @@ const domEvents = (uid) => {
 
   document.querySelector('#display-region').addEventListener('click', (e) => {
     if (e.target.id.includes('edit-term')) {
-      // const [, firebaseKey] = e.target.id.split('--');
-      console.warn('Editing chosen term');
+      const [, firebaseKey] = e.target.id.split('--');
+      getSingleTerm(firebaseKey).then((term) => addTermForm(uid, term));
     }
 
     if (e.target.id.includes('delete-term')) {

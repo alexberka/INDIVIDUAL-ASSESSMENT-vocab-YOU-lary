@@ -24,6 +24,12 @@ body {
   margin: 0 auto;
 }
 
+@media (min-width: 1440) {
+  #display-region {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 .card {
   margin-top: 0;
   margin-bottom: auto;
@@ -70,4 +76,9 @@ body {
 .term-name {
   color: black;
   text-decoration: none;
+}
+
+.add-term {
+  width: 90%;
+  margin: 0 auto;
 }
