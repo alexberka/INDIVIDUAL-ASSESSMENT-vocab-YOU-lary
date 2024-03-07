@@ -1,4 +1,6 @@
-import { getTerms, deleteTerm, getSingleTerm } from '../api/terms';
+import {
+  getTerms, deleteTerm, getSingleTerm, updateTerm
+} from '../api/terms';
 import addTermForm from '../components/forms/addTermForm';
 import showTerms from '../pages/termsDisplay';
 import { unescape } from '../utils/escape';
@@ -38,7 +40,14 @@ const domEvents = (uid) => {
     }
 
     if (e.target.id.includes('vis-toggle')) {
-      console.warn('Changing visibility settings');
+      const [, curr, firebaseKey] = e.target.id.split('--');
+      const patchPayload = {
+        public: (curr === 'false'),
+        firebaseKey
+      };
+      updateTerm(patchPayload).then(() => {
+        getTerms(uid).then((data) => showTerms(data, uid));
+      });
     }
 
     if (e.target.id.includes('copy-to-user')) {
