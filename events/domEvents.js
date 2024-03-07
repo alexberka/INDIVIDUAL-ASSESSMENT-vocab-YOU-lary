@@ -5,13 +5,16 @@ import { unescape } from '../utils/escape';
 
 const domEvents = (uid) => {
   document.querySelector('#button-bar').addEventListener('click', (e) => {
-    if (e.target.id.includes('sort-terms-by')) {
-      console.warn('Sorting terms');
-    }
-
     if (e.target.id.includes('filter-terms-by')) {
       const [, filterBy] = e.target.id.split('--');
       const [a, sortBy] = document.body.id.split('..');
+      document.body.id = `${a}..${sortBy}..${filterBy}`;
+      getTerms(uid).then((data) => showTerms(data, uid));
+    }
+
+    if (e.target.id.includes('sort-terms-by')) {
+      const [, sortBy] = e.target.id.split('--');
+      const [a, , filterBy] = document.body.id.split('..');
       document.body.id = `${a}..${sortBy}..${filterBy}`;
       getTerms(uid).then((data) => showTerms(data, uid));
     }

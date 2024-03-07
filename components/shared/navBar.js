@@ -2,7 +2,7 @@ import renderToDom from '../../utils/renderToDom';
 
 const navBar = () => {
   const domString = `
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-5">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand title" href="#">Polyglot Playground</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">

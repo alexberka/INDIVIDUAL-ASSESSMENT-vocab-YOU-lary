@@ -6,14 +6,23 @@ body {
   background-color: antiquewhite;
   color: brown;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 70px;
+}
+
+.navbar {
+  margin-bottom: 0px;
 }
 
 #button-bar {
+  .dropdown {
+    display: inline-block;
+    margin-right: 10px;
+  }
   text-align: right;
   margin: 0 auto;
   padding: 10px;
-  width: 90%;
+  padding-right: 20px;
+  width: 100%;
 }
 
 #display-region {

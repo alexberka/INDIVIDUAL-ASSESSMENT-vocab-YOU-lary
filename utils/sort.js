@@ -9,6 +9,12 @@ const azSortTerm = (a, b) => {
   }
 };
 
+const dateSortTerm = (a, b) => {
+  const first = Number(a.created.replace(/\D/g, ''));
+  const second = Number(b.created.replace(/\D/g, ''));
+  return second - first;
+};
+
 const azSortCategory = (a, b) => {
   const first = a.category.replace(/\W/g, '').toUpperCase();
   const second = b.category.replace(/\W/g, '').toUpperCase();
@@ -20,4 +26,4 @@ const azSortCategory = (a, b) => {
   }
 };
 
-export { azSortTerm, azSortCategory };
+export { azSortTerm, dateSortTerm, azSortCategory };

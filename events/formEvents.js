@@ -22,8 +22,7 @@ const formEvents = (uid) => {
         const patchPayload = { firebaseKey: name };
         updateTerm(patchPayload).then(
           getTerms(uid).then((data) => {
-            const [a, b] = document.body.id.split('..');
-            document.body.id = `${a}..${b}..all`;
+            document.body.id = 'terms..new..all';
             showTerms(data, uid);
           })
         );
@@ -38,9 +37,6 @@ const formEvents = (uid) => {
         definition: document.querySelector('#definition').value,
         category_id: document.querySelector('#form-category').value,
         public: document.querySelector('#visibility').value,
-        created: new Date()
-          .toISOString().split('T').join(' ')
-          .split('.')[0].concat(' UTC'),
         firebaseKey
       };
 
