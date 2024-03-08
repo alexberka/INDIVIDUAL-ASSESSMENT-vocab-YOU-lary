@@ -13,8 +13,16 @@ body {
   margin-bottom: 0px;
 }
 
+.navbar-text {
+  display: flex;
+  gap: 10px;
+  width: 40%;
+  min-width: 250px;
+  margin: 0 0 0 auto;
+}
+
 #button-bar {
-  .dropdown {
+  .display-option {
     display: inline-block;
     margin-right: 10px;
   }
@@ -42,6 +50,10 @@ body {
 .card {
   margin-top: 0;
   margin-bottom: auto;
+}
+
+.pub-card {
+  background: rgb(197, 197, 197);
 }
 
 .card-body {
