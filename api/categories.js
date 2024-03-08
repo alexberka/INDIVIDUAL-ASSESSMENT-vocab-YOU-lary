@@ -2,7 +2,7 @@ import client from '../utils/client';
 
 const endpoint = client.databaseURL;
 
-const getCategories = () => new Promise((resolve, reject) => {
+const getAllCategories = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/categories.json`, {
     method: 'GET',
     headers: {
@@ -32,4 +32,4 @@ const getSingleCategory = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getCategories, getSingleCategory };
+export { getAllCategories, getSingleCategory };

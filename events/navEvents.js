@@ -1,11 +1,13 @@
+import getCategories from '../api/mergedCalls';
 import { getTerms } from '../api/terms';
 import addTermForm from '../components/forms/addTermForm';
+import showCategories from '../pages/categoriesDisplay';
 import showTerms from '../pages/termsDisplay';
 
 const navEvents = (uid) => {
   document.querySelector('#nav-bar').addEventListener('click', (e) => {
     if (e.target.id.includes('terms-tab')) {
-      document.body.id = 'terms..az..all';
+      document.body.id = 'terms..az..all..';
       document.querySelector('#search').placeholder = 'Search Terms';
       getTerms(uid).then((data) => showTerms(data, uid));
     }
@@ -13,10 +15,11 @@ const navEvents = (uid) => {
       addTermForm(uid);
     }
     if (e.target.id.includes('categories-tab')) {
-      console.warn('Switching to categories tab');
+      document.body.id = 'categories..az..all..';
+      getCategories(uid).then((data) => showCategories(data, uid));
     }
     if (e.target.id.includes('community-tab')) {
-      document.body.id = 'community..az..all';
+      document.body.id = 'community..az..all..';
       document.querySelector('#search').placeholder = 'Search Community';
       console.warn('Switching to community tab');
     }

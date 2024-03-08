@@ -1,7 +1,9 @@
+import getCategories from '../api/mergedCalls';
 import {
   getTerms, deleteTerm, getSingleTerm, updateTerm
 } from '../api/terms';
 import addTermForm from '../components/forms/addTermForm';
+import showCategories from '../pages/categoriesDisplay';
 import showTerms from '../pages/termsDisplay';
 import { unescape } from '../utils/escape';
 
@@ -25,6 +27,12 @@ const domEvents = (uid) => {
       const [a, , filterBy, searched] = document.body.id.split('..');
       document.body.id = `${a}..${sortBy}..${filterBy}..${searched}`;
       getTerms(uid).then((data) => showTerms(data, uid));
+    }
+
+    if (e.target.id.includes('sort-categories-by')) {
+      const [, sortBy] = e.target.id.split('--');
+      document.body.id = `categories..${sortBy}..all..`;
+      getCategories(uid).then((data) => showCategories(data, uid));
     }
   });
 

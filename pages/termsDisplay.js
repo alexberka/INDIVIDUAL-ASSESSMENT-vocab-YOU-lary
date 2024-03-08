@@ -1,4 +1,4 @@
-import { getCategories } from '../api/categories';
+import getCategories from '../api/mergedCalls';
 import clearDom from '../utils/clearDom';
 import { escape } from '../utils/escape';
 import renderToDom from '../utils/renderToDom';
@@ -8,7 +8,7 @@ const showTerms = async (terms, uid) => {
   clearDom();
   let buttonsHTML = '';
   let termsHTML = '';
-  const categories = await getCategories();
+  const categories = await getCategories(uid);
   const [, sortBy, filterBy, searched] = document.body.id.split('..');
   if (searched) {
     buttonsHTML += `

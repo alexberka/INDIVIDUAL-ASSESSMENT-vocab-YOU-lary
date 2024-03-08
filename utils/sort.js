@@ -26,4 +26,12 @@ const azSortCategory = (a, b) => {
   }
 };
 
-export { azSortTerm, dateSortTerm, azSortCategory };
+const mlSortCategory = (a, b) => {
+  const first = a.count;
+  const second = b.count;
+  return second - first;
+};
+
+export {
+  azSortTerm, dateSortTerm, azSortCategory, mlSortCategory
+};
