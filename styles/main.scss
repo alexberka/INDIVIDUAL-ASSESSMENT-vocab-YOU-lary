@@ -22,7 +22,7 @@ body {
 }
 
 #button-bar {
-  .dropdown {
+  .display-option {
     display: inline-block;
     margin-right: 10px;
   }
@@ -50,6 +50,10 @@ body {
 .card {
   margin-top: 0;
   margin-bottom: auto;
+}
+
+.pub-card {
+  background: rgb(197, 197, 197);
 }
 
 .card-body {

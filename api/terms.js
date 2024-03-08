@@ -2,7 +2,7 @@ import client from '../utils/client';
 
 const endpoint = client.databaseURL;
 
-const getTerms = (uid) => new Promise((resolve, reject) => {
+const getUserTerms = (uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/terms.json${uid ? `?orderBy="uid"&equalTo="${uid}"` : ''}`, {
     method: 'GET',
     headers: {
@@ -19,6 +19,19 @@ const getTerms = (uid) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
+
+const getTerms = async (uid) => {
+  const [page, , , searched] = document.body.id.split('..');
+  const allTerms = await getUserTerms(page === 'community' ? '' : uid);
+  const specTerms = allTerms.filter((term) => term.uid === uid || term.public === true);
+  if (searched) {
+    return specTerms.filter((term) => term.term.toLowerCase().includes(searched)
+      || term.definition.toLowerCase().includes(searched));
+  // eslint-disable-next-line no-else-return
+  } else {
+    return specTerms;
+  }
+};
 
 const getSingleTerm = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/terms/${firebaseKey}.json`, {
@@ -71,5 +84,5 @@ const deleteTerm = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 export {
-  getTerms, getSingleTerm, createTerm, updateTerm, deleteTerm
+  getUserTerms, getTerms, getSingleTerm, createTerm, updateTerm, deleteTerm
 };

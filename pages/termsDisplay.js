@@ -6,13 +6,19 @@ import { azSortCategory, azSortTerm, dateSortTerm } from '../utils/sort';
 
 const showTerms = async (terms, uid) => {
   clearDom();
-
+  let buttonsHTML = '';
   let termsHTML = '';
   const categories = await getCategories();
-  const [, sortBy, filterBy] = document.body.id.split('..');
+  const [, sortBy, filterBy, searched] = document.body.id.split('..');
+  if (searched) {
+    buttonsHTML += `
+      <div class="display-option">
+        <button class="btn btn-danger" type="button" id="search-reset">Results for "${searched}" (Click to Reset)</button>
+      </div>`;
+  }
 
-  let buttonsHTML = `
-    <div class="dropdown">
+  buttonsHTML += `
+    <div class="dropdown display-option">
       <button class="btn btn-dark dropdown-toggle" type="button" id="filterByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
         ${filterBy === 'all' ? 'All' : categories.find((cat) => cat.firebaseKey === filterBy).category}
       </button>
@@ -36,7 +42,7 @@ const showTerms = async (terms, uid) => {
   ];
 
   buttonsHTML += `
-    <div class="dropdown">
+    <div class="dropdown display-option">
       <button class="btn btn-dark dropdown-toggle" type="button" id="sortByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
         ${sortOptions.find((sort) => sort.key === sortBy).vis}
       </button>
@@ -68,7 +74,7 @@ const showTerms = async (terms, uid) => {
   if (dispTerms.length) {
     dispTerms.forEach((term) => {
       termsHTML += `
-        <div class="card" style="width: 18rem;">
+        <div class="card${term.uid === uid ? '' : ' pub-card'}" style="width: 18rem;">
           <div class="card-body">
             <div class="term-data">
               <i ${term.uid === uid ? `id="vis-toggle--${term.public}--${term.firebaseKey}"` : ''} 

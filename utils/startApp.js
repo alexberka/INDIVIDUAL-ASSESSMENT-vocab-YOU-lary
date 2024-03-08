@@ -15,7 +15,7 @@ const startApp = (uid) => {
   navEvents(uid);
   logoutButton();
 
-  document.body.id = 'terms..az..all';
+  document.body.id = 'terms..az..all..';
   getTerms(uid).then((data) => showTerms(data, uid));
 };
 
