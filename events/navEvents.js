@@ -1,5 +1,6 @@
-import getCategories from '../api/mergedCalls';
+import { getCategories } from '../api/mergedCalls';
 import { getTerms } from '../api/terms';
+import addCategoryForm from '../components/forms/addCategoryForm';
 import addTermForm from '../components/forms/addTermForm';
 import showCategories from '../pages/categoriesDisplay';
 import showTerms from '../pages/termsDisplay';
@@ -17,6 +18,9 @@ const navEvents = (uid) => {
     if (e.target.id.includes('categories-tab')) {
       document.body.id = 'categories..az..all..';
       getCategories(uid).then((data) => showCategories(data, uid));
+    }
+    if (e.target.id.includes('new-category-tab')) {
+      addCategoryForm(uid);
     }
     if (e.target.id.includes('community-tab')) {
       document.body.id = 'community..az..all..';

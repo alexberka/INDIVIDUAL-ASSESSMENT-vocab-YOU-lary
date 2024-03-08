@@ -7,6 +7,7 @@ const domBuilder = () => {
       <div id="button-bar"></div>
       <div id="display-region"></div>
       <div id="form-container"></div>
+      <div id="aux-form-container"></div>
     </div>`;
 
   renderToDom('#app', domHTML);

@@ -32,4 +32,16 @@ const getSingleCategory = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getAllCategories, getSingleCategory };
+const deleteCategory = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/categories/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
+export { getAllCategories, getSingleCategory, deleteCategory };

@@ -1,4 +1,4 @@
-import getCategories from '../api/mergedCalls';
+import { deleteFullCategory, getCategories } from '../api/mergedCalls';
 import {
   getTerms, deleteTerm, getSingleTerm, updateTerm
 } from '../api/terms';
@@ -66,6 +66,15 @@ const domEvents = (uid) => {
 
     if (e.target.id.includes('copy-to-user')) {
       console.warn('Copying card to user profile');
+    }
+
+    if (e.target.id.includes('delete-category')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      // const termTitle = document.querySelector(`#term-title-${firebaseKey}`).innerHTML;
+      // eslint-disable-next-line no-alert
+      if (window.confirm('Delete from collection?')) {
+        deleteFullCategory(firebaseKey, uid);
+      }
     }
   });
 };

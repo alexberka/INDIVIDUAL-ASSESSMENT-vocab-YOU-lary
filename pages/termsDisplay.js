@@ -1,4 +1,4 @@
-import getCategories from '../api/mergedCalls';
+import { getCategories, getUnusedCommunityCategories } from '../api/mergedCalls';
 import clearDom from '../utils/clearDom';
 import { escape } from '../utils/escape';
 import renderToDom from '../utils/renderToDom';
@@ -8,8 +8,13 @@ const showTerms = async (terms, uid) => {
   clearDom();
   let buttonsHTML = '';
   let termsHTML = '';
+  const [page, sortBy, filterBy, searched] = document.body.id.split('..');
   const categories = await getCategories(uid);
-  const [, sortBy, filterBy, searched] = document.body.id.split('..');
+
+  if (page === 'community') {
+    const extraCats = await getUnusedCommunityCategories(uid);
+    categories.push(...extraCats);
+  }
   if (searched) {
     buttonsHTML += `
       <div class="display-option">

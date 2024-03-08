@@ -1,6 +1,6 @@
 import clearDom from '../../utils/clearDom';
 import renderToDom from '../../utils/renderToDom';
-import selectCategory from './selectCategory';
+import { selectCategory } from './selectCategory';
 
 const addTermForm = (uid, term = {}) => {
   clearDom();

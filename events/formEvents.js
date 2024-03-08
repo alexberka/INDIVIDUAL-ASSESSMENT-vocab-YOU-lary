@@ -39,13 +39,13 @@ const formEvents = (uid) => {
         firebaseKey
       };
 
-      updateTerm(patchPayload).then(
+      updateTerm(patchPayload).then(() => {
+        const [a, b] = document.body.id.split('..');
+        document.body.id = `${a}..${b}..all..`;
         getTerms(uid).then((data) => {
-          const [a, b] = document.body.id.split('..');
-          document.body.id = `${a}..${b}..all..`;
           showTerms(data, uid);
-        })
-      );
+        });
+      });
     }
 
     if (e.target.id.includes('create-category')) {
