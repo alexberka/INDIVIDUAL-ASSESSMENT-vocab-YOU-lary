@@ -16,13 +16,12 @@ const formEvents = (uid) => {
           .split('.')[0].concat(' UTC'),
         uid
       };
-      console.warn(payload);
 
       createTerm(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateTerm(patchPayload).then(
           getTerms(uid).then((data) => {
-            document.body.id = 'terms..new..all';
+            document.body.id = 'terms..new..all..';
             showTerms(data, uid);
           })
         );
@@ -43,7 +42,7 @@ const formEvents = (uid) => {
       updateTerm(patchPayload).then(
         getTerms(uid).then((data) => {
           const [a, b] = document.body.id.split('..');
-          document.body.id = `${a}..${b}..all`;
+          document.body.id = `${a}..${b}..all..`;
           showTerms(data, uid);
         })
       );

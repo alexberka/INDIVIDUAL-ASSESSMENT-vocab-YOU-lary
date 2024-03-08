@@ -1,10 +1,10 @@
-import { getCategories } from '../../api/categories';
+import getCategories from '../../api/mergedCalls';
 import renderToDom from '../../utils/renderToDom';
 import { azSortCategory } from '../../utils/sort';
 
 const selectCategory = (uid, categoryId) => {
   let optionsHTML = '';
-  getCategories().then((cats) => {
+  getCategories(uid).then((cats) => {
     cats.sort(azSortCategory).forEach((cat) => {
       optionsHTML += `
         <option class="list-group-item list-group-item-light" 
