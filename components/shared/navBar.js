@@ -20,7 +20,7 @@ const navBar = () => {
               <a id="categories-tab" class="nav-link" href="#">Categories</a>
             </li>
             <li class="nav-item">
-              <a id="new-term-tab" class="nav-link" href="#">Add Category</a>
+              <a id="new-category-tab" class="nav-link" href="#">Add Category</a>
             </li>
             <li class="nav-item">
               <a id="community-tab" class="nav-link" href="#">Community</a>

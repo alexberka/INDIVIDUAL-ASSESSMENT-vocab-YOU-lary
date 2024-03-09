@@ -1,4 +1,4 @@
-import getCategories from '../../api/mergedCalls';
+import { getCategories, getUnusedCommunityCategories } from '../../api/mergedCalls';
 import renderToDom from '../../utils/renderToDom';
 import { azSortCategory } from '../../utils/sort';
 
@@ -16,4 +16,31 @@ const selectCategory = (uid, categoryId) => {
   });
 };
 
-export default selectCategory;
+const selectCommunityCategory = (uid) => {
+  getUnusedCommunityCategories(uid).then((cats) => {
+    if (cats.length) {
+      let optionsHTML = '';
+      cats.sort(azSortCategory).forEach((cat) => {
+        optionsHTML += `
+          <option class="list-group-item list-group-item-light" 
+            value="${cat.firebaseKey}">
+            ${cat.category}
+          </option>`;
+      });
+      const auxFormHTML = `
+        <form id="select-new-category" class="add-category">
+          <div class="mb-3">
+            <p>Or:</p>
+            <label for="form-category" class="form-label">Add Category From Community</label>
+            <select class="btn btn-warning dropdown-toggle" type="dropdown" id="form-category" required>
+              ${optionsHTML}
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success">Add to Collection</button>
+        </form>`;
+      renderToDom('#aux-form-container', auxFormHTML);
+    }
+  });
+};
+
+export { selectCategory, selectCommunityCategory };
