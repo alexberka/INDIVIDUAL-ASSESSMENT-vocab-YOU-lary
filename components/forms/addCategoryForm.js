@@ -10,7 +10,7 @@ const addCategoryForm = (uid) => {
         <label for="new-category" class="form-label">Enter Category Name</label>
         <input type="text" class="form-control" id="new-category" aria-describedby="categoryHelp" required>
       </div>
-      <button type="submit" class="btn btn-success">Create Category</button>
+      <button type="submit" class="btn btn-info">Create Category</button>
     </form>`;
   renderToDom('#form-container', formHTML);
   selectCommunityCategory(uid);

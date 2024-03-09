@@ -85,7 +85,7 @@ const showTerms = async (terms, uid) => {
           <div class="card-body">
             <div class="term-data">
               <i ${term.uid === uid ? `id="vis-toggle--${term.public}--${term.firebaseKey}"` : ''} 
-                class="${term.uid === uid ? 'clickable ' : ''}fas ${term.public === 'true' ? 'fa-globe public-true' : 'fa-lock public-false'}" aria-hidden="true"></i>
+                class="${term.uid === uid ? 'clickable mine ' : ''}fas ${term.public === 'true' ? 'fa-globe public-true' : 'fa-lock public-false'}" aria-hidden="true"></i>
               <p>${categories.find((cat) => cat.firebaseKey === term.category_id).category}</p>
             </div>
             <h6>

@@ -31,12 +31,12 @@ const selectCommunityCategory = (uid) => {
         <form id="select-new-category" class="add-category">
           <div class="mb-3">
             <p>OR</p>
-            <label for="form-category" class="form-label">Select Category From Community&ensp;</label>
+            <label for="form-category" class="form-label">Select Category From Community:&ensp;</label>
             <select class="btn btn-warning dropdown-toggle" type="dropdown" id="form-category" required>
               ${optionsHTML}
             </select>
           </div>
-          <button type="submit" class="btn btn-success">Add to Collection</button>
+          <button type="submit" class="btn btn-info">Add to Collection</button>
         </form>`;
       renderToDom('#aux-form-container', auxFormHTML);
     }
