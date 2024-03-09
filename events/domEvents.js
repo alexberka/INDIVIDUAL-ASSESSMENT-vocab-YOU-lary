@@ -60,9 +60,14 @@ const domEvents = (uid) => {
         public: (curr === 'true' ? 'false' : 'true'),
         firebaseKey
       };
-      updateTerm(patchPayload).then(() => {
-        getTerms(uid).then((data) => showTerms(data, uid));
-      });
+      if (curr === 'true') {
+        document.querySelector(`#${e.target.id}`).className = 'clickable fas fa-lock public-false';
+        document.querySelector(`#${e.target.id}`).id = `vis-toggle--false--${firebaseKey}`;
+      } else {
+        document.querySelector(`#${e.target.id}`).className = 'clickable fas fa-globe public-true';
+        document.querySelector(`#${e.target.id}`).id = `vis-toggle--true--${firebaseKey}`;
+      }
+      updateTerm(patchPayload);
     }
 
     if (e.target.id.includes('copy-to-user')) {

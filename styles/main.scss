@@ -67,9 +67,15 @@ body {
   .term-data-right {
     display: flex;
   }
-  .public:hover::after {
-    content: "  Toggle visibility";
-    font-size: 0.8rem;
+  .public-true:hover::after {
+    content: "  MAKE PRIVATE";
+    font-size: 0.6rem;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  .public-false:hover::after {
+    content: "  MAKE PUBLIC";
+    font-size: 0.6rem;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
   p {
     margin-bottom: 0;
