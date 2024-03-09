@@ -27,7 +27,7 @@ const navEvents = (uid) => {
     if (e.target.id.includes('community-tab')) {
       document.body.id = 'community..az..all..';
       document.querySelector('#search').placeholder = 'Search Community';
-      console.warn('Switching to community tab');
+      getTerms(uid).then((data) => showTerms(data, uid));
     }
   });
 

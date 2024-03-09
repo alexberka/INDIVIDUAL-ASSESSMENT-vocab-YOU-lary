@@ -78,6 +78,7 @@ body {
 
 .clickable:hover {
   cursor: pointer;
+  text-shadow: darkgray 0 0 1px;
 }
 
 .term-footer {
@@ -99,7 +100,11 @@ body {
   text-decoration: none;
 }
 
-.add-term {
+.add-form {
   width: 90%;
   margin: 0 auto;
+}
+
+#aux-form-container {
+  margin-top: 20px;
 }

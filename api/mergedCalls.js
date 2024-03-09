@@ -1,7 +1,9 @@
 import {
   createCategory, deleteCategory, getAllCategories, updateCategory
 } from './categories';
-import { deleteTerm, getTerms } from './terms';
+import {
+  createTerm, deleteTerm, getSingleTerm, getTerms, updateTerm
+} from './terms';
 import {
   createUserCategory, deleteUserCategory, getUserCategories, getUserCategoriesByCategory, updateUserCategory
 } from './userCategories';
@@ -13,25 +15,14 @@ const getCategories = async (uid) => {
   return categories;
 };
 
-const getUnusedCommunityCategories = async (uid) => {
+const getUnaddedCategories = async (uid) => {
   // Retrieve all categories from firebase
   const allCategories = await getAllCategories();
-  // Retrieve all community terms in firebase
-  const allTerms = await getTerms(uid);
-  // Remove terms in user's collection
-  console.warn(allTerms, 'all');
-  const communityTerms = allTerms.filter((term) => term.uid !== uid);
-  console.warn(communityTerms, 'gUCC');
-  // Filter all categories to only include categories used by public, non user terms
-  const communityCategories = allCategories.filter((cat) => communityTerms.some((t) => t.category_id === cat.firebaseKey));
   // Get user-specific user-categories
   const userCategories = await getUserCategories(uid);
-  // Retrieve category info for user-categories
-  const categories = allCategories.filter((cat) => userCategories.some((uc) => uc.category_id === cat.firebaseKey));
-  // Filter categories used by public, non-user terms to exclude categories already in user's collection
-  const unusedCommunityCategories = communityCategories.filter((cc) => !categories.some((bb) => bb.category === cc.category));
-
-  return unusedCommunityCategories;
+  // Retrieve category info for unadded categories
+  const unaddedCategories = allCategories.filter((cat) => !userCategories.some((uc) => uc.category_id === cat.firebaseKey));
+  return unaddedCategories;
 };
 
 const deleteFullCategory = async (categoryFirebaseKey, uid) => {
@@ -64,6 +55,34 @@ const brandNewCategory = async (uid) => {
   await updateUserCategory(uCatPatchPayload);
 };
 
+const copyToUser = async (termFirebaseKey, uid) => {
+  // Get term to be copied
+  const copyPayload = await getSingleTerm(termFirebaseKey);
+  // Update timestamp, set privacy to 'private' and overwrite with user's uid
+  copyPayload.created = new Date()
+    .toISOString().split('T').join(' ')
+    .split('.')[0].concat(' UTC');
+  copyPayload.public = 'false';
+  copyPayload.uid = uid;
+  // Create copied term
+  const tFbObj = await createTerm(copyPayload);
+  // Replace firebaseKey with new
+  const termPatchPayload = { firebaseKey: tFbObj.name };
+  await updateTerm(termPatchPayload);
+  // Check if user already has category
+  const currUserCats = await getUserCategories(uid);
+  // If not, add to user's categories
+  if (!currUserCats.find((cat) => cat.category_id === copyPayload.category_id)) {
+    // Create User Category object
+    const uCatPayload = { category_id: copyPayload.category_id, uid };
+    // Post to firebase, capturing response
+    const fbObj = await createUserCategory(uCatPayload);
+    // Append new firebase key and update
+    const uCatPatchPayload = { firebaseKey: fbObj.name };
+    await updateUserCategory(uCatPatchPayload);
+  }
+};
+
 export {
-  getCategories, getUnusedCommunityCategories, deleteFullCategory, brandNewCategory
+  getCategories, getUnaddedCategories, deleteFullCategory, brandNewCategory, copyToUser
 };
