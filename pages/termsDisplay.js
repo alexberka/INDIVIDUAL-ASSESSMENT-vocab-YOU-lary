@@ -1,4 +1,5 @@
-import { getCategories, getUnusedCommunityCategories } from '../api/mergedCalls';
+import { getAllCategories } from '../api/categories';
+import { getCategories } from '../api/mergedCalls';
 import clearDom from '../utils/clearDom';
 import { escape } from '../utils/escape';
 import renderToDom from '../utils/renderToDom';
@@ -9,11 +10,12 @@ const showTerms = async (terms, uid) => {
   let buttonsHTML = '';
   let termsHTML = '';
   const [page, sortBy, filterBy, searched] = document.body.id.split('..');
-  const categories = await getCategories(uid);
-
+  let categories = [];
   if (page === 'community') {
-    const extraCats = await getUnusedCommunityCategories(uid);
-    categories.push(...extraCats);
+    categories = await getAllCategories();
+    categories = categories.filter((cat) => terms.some((term) => cat.firebaseKey === term.category_id));
+  } else {
+    categories = await getCategories(uid);
   }
   if (searched) {
     buttonsHTML += `
@@ -97,7 +99,7 @@ const showTerms = async (terms, uid) => {
               </div>
             </div>
             <div class="term-footer">
-              ${term.uid !== uid ? `<p id="copy-to-user--${term.firebaseKey}" class="clickable">Copy To Collection</p>` : `<p id="edit-term--${term.firebaseKey}" class="clickable">Edit</p><p id="delete-term--${term.firebaseKey}" class="clickable">Delete</p>`}
+              ${term.uid !== uid ? `<p id="copy-to-user--${term.firebaseKey}" class="clickable to-collection">Copy To Collection</p>` : `<p id="edit-term--${term.firebaseKey}" class="clickable">Edit</p><p id="delete-term--${term.firebaseKey}" class="clickable">Delete</p>`}
               <p class="timestamp">Created: ${term.created}</p>
             </div>
           </div>

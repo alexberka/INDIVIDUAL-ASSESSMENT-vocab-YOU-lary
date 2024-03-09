@@ -1,4 +1,4 @@
-import { deleteFullCategory, getCategories } from '../api/mergedCalls';
+import { copyToUser, deleteFullCategory, getCategories } from '../api/mergedCalls';
 import {
   getTerms, deleteTerm, getSingleTerm, updateTerm
 } from '../api/terms';
@@ -66,7 +66,10 @@ const domEvents = (uid) => {
     }
 
     if (e.target.id.includes('copy-to-user')) {
-      console.warn('Copying card to user profile');
+      const [, firebaseKey] = e.target.id.split('--');
+      copyToUser(firebaseKey, uid).then(() => {
+        getTerms(uid).then((data) => showTerms(data, uid));
+      });
     }
 
     if (e.target.id.includes('view-category')) {

@@ -52,7 +52,6 @@ const formEvents = (uid) => {
     }
 
     if (e.target.id.includes('create-category')) {
-      console.warn('Creating category');
       brandNewCategory(uid).then(() => {
         document.body.id = 'categories..az..all..';
         getCategories(uid).then((data) => showCategories(data, uid));

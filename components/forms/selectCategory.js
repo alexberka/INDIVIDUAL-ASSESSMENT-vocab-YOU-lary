@@ -1,4 +1,4 @@
-import { getCategories, getUnusedCommunityCategories } from '../../api/mergedCalls';
+import { getCategories, getUnaddedCategories } from '../../api/mergedCalls';
 import renderToDom from '../../utils/renderToDom';
 import { azSortCategory } from '../../utils/sort';
 
@@ -17,7 +17,7 @@ const selectCategory = (uid, categoryId) => {
 };
 
 const selectCommunityCategory = (uid) => {
-  getUnusedCommunityCategories(uid).then((cats) => {
+  getUnaddedCategories(uid).then((cats) => {
     if (cats.length) {
       let optionsHTML = '';
       cats.sort(azSortCategory).forEach((cat) => {
@@ -30,8 +30,8 @@ const selectCommunityCategory = (uid) => {
       const auxFormHTML = `
         <form id="select-new-category" class="add-category">
           <div class="mb-3">
-            <p>Or:</p>
-            <label for="form-category" class="form-label">Add Category From Community</label>
+            <p>OR</p>
+            <label for="form-category" class="form-label">Select Category From Community&ensp;</label>
             <select class="btn btn-warning dropdown-toggle" type="dropdown" id="form-category" required>
               ${optionsHTML}
             </select>
