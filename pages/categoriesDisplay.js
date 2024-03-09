@@ -1,4 +1,5 @@
 import { getTerms } from '../api/terms';
+import { navActive } from '../components/shared/navBar';
 import clearDom from '../utils/clearDom';
 import renderToDom from '../utils/renderToDom';
 import { azSortCategory, mlSortCategory } from '../utils/sort';
@@ -64,6 +65,7 @@ const showCategories = async (categories, uid) => {
     });
     renderToDom('#display-region', categoriesHTML);
   }
+  navActive();
 };
 
 export default showCategories;

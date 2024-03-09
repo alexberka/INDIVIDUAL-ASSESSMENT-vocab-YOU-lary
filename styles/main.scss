@@ -3,20 +3,40 @@
 
 
 body {
-  background-color: antiquewhite;
-  color: brown;
+  background-color: rgb(191, 187, 192);
+  color: black;
   text-align: center;
   margin-top: 70px;
+}
+
+.welcome {
+  margin: 30vh auto 0 auto;
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 30px;
+  width: 40%;
+  padding: 30px;
+  h4 {
+    font-style: italic;
+  }
+  h1 {
+    margin: 30px 0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
 }
 
 .navbar {
   margin-bottom: 0px;
 }
 
+.navbar-brand {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .navbar-text {
   display: flex;
   gap: 10px;
-  width: 40%;
+  width: 38%;
   min-width: 250px;
   margin: 0 0 0 auto;
 }
@@ -35,21 +55,17 @@ body {
 
 #display-region {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  width: 90%;
+  width: 90vw;
   margin: 0 auto;
+  justify-content: space-around;
 }
 
-@media (min-width: 1440) {
-  #display-region {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.card {
+#display-region > .card {
   margin-top: 0;
   margin-bottom: auto;
+  box-shadow: black 0 0 3px;
 }
 
 .pub-card {
@@ -58,6 +74,7 @@ body {
 
 .card-body {
   padding: 10px 10px 5px 10px;
+  border: 0;
 }
 
 .term-data {
@@ -67,12 +84,12 @@ body {
   .term-data-right {
     display: flex;
   }
-  .public-true:hover::after {
+  .mine.public-true:hover::after {
     content: "  MAKE PRIVATE";
     font-size: 0.6rem;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
-  .public-false:hover::after {
+  .mine.public-false:hover::after {
     content: "  MAKE PUBLIC";
     font-size: 0.6rem;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -107,10 +124,37 @@ body {
 }
 
 .add-form {
-  width: 90%;
+  width: 80%;
+  min-width: 400px;
   margin: 0 auto;
+}
+
+#form-container, #aux-form-container {
+  p, label {
+    text-shadow: black 0 0 1px;
+    font-size: 1.1rem;
+  }
+  // label {
+  //   background-color: rgba(0, 0, 0, 0.5);
+  //   padding: 4px 8px;
+  //   text-align: center;
+  //   border-radius: 10px;
+  //   border: 2px solid black;
+  // }
+  button, input, select, textarea {
+    box-shadow: black 0 0 3px;
+  }
 }
 
 #aux-form-container {
   margin-top: 20px;
+  select {
+    margin-bottom: 4px;
+  }
+}
+
+@media (min-width: 1440) {
+  #display-region {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

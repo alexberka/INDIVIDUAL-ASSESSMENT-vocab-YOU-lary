@@ -20,7 +20,7 @@ const addTermForm = (uid, term = {}) => {
         <option ${term.public === 'true' ? 'value="true" selected ><i class="fas fa-globe" aria-hidden="true"></i>Public' : 'value="false" selected><i class="fas fa-lock" aria-hidden="true"></i>Private'}</option>
         <option ${term.public === 'true' ? 'value="false">Private' : 'value="true">Public'}</option>
       </select>
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn btn-info">Submit</button>
     </form>`;
   renderToDom('#form-container', formHTML);
   selectCategory(uid, `${term.category_id || ''}`);

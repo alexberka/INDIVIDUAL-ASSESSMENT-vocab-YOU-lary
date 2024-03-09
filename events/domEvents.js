@@ -3,6 +3,7 @@ import {
   getTerms, deleteTerm, getSingleTerm, updateTerm
 } from '../api/terms';
 import addTermForm from '../components/forms/addTermForm';
+import { navActive } from '../components/shared/navBar';
 import showCategories from '../pages/categoriesDisplay';
 import showTerms from '../pages/termsDisplay';
 import { unescape } from '../utils/escape';
@@ -61,10 +62,10 @@ const domEvents = (uid) => {
         firebaseKey
       };
       if (curr === 'true') {
-        document.querySelector(`#${e.target.id}`).className = 'clickable fas fa-lock public-false';
+        document.querySelector(`#${e.target.id}`).className = 'clickable mine fas fa-lock public-false';
         document.querySelector(`#${e.target.id}`).id = `vis-toggle--false--${firebaseKey}`;
       } else {
-        document.querySelector(`#${e.target.id}`).className = 'clickable fas fa-globe public-true';
+        document.querySelector(`#${e.target.id}`).className = 'clickable mine fas fa-globe public-true';
         document.querySelector(`#${e.target.id}`).id = `vis-toggle--true--${firebaseKey}`;
       }
       updateTerm(patchPayload);
@@ -80,6 +81,7 @@ const domEvents = (uid) => {
     if (e.target.id.includes('view-category')) {
       const [, firebaseKey] = e.target.id.split('--');
       document.body.id = `terms..az..${firebaseKey}..`;
+      navActive();
       getTerms(uid).then((data) => showTerms(data, uid));
     }
 
