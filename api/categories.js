@@ -20,15 +20,29 @@ const getAllCategories = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleCategory = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/categories.json?orderBy="uid"&equalTo="${firebaseKey}"`, {
-    method: 'GET',
+const createCategory = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/categories.json`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
+    body: JSON.stringify(payload)
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const updateCategory = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/categories/${payload.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
@@ -44,4 +58,6 @@ const deleteCategory = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getAllCategories, getSingleCategory, deleteCategory };
+export {
+  getAllCategories, createCategory, updateCategory, deleteCategory
+};

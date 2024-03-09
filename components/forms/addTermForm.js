@@ -17,8 +17,8 @@ const addTermForm = (uid, term = {}) => {
       <select class="btn btn-warning dropdown-toggle" type="dropdown" id="form-category" required>
       </select>
       <select class="btn btn-dark dropdown-toggle" type="dropdown" id="visibility" required>
-        <option ${term.public ? 'value=true selected ><i class="fas fa-globe" aria-hidden="true"></i>Public' : 'value=false selected><i class="fas fa-lock" aria-hidden="true"></i>Private'}</option>
-        <option ${term.public ? 'value=false>Private' : 'value=true>Public'}</option>
+        <option ${term.public === 'true' ? 'value="true" selected ><i class="fas fa-globe" aria-hidden="true"></i>Public' : 'value="false" selected><i class="fas fa-lock" aria-hidden="true"></i>Private'}</option>
+        <option ${term.public === 'false' ? 'value="false">Private' : 'value="true">Public'}</option>
       </select>
       <button type="submit" class="btn btn-success">Submit</button>
     </form>`;

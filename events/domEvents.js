@@ -56,7 +56,8 @@ const domEvents = (uid) => {
     if (e.target.id.includes('vis-toggle')) {
       const [, curr, firebaseKey] = e.target.id.split('--');
       const patchPayload = {
-        public: (curr === 'false'),
+        // Toggle visibility setting (cannot use booleans with firebase)
+        public: (curr === 'true' ? 'false' : 'true'),
         firebaseKey
       };
       updateTerm(patchPayload).then(() => {
@@ -68,12 +69,21 @@ const domEvents = (uid) => {
       console.warn('Copying card to user profile');
     }
 
+    if (e.target.id.includes('view-category')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      document.body.id = `terms..az..${firebaseKey}..`;
+      getTerms(uid).then((data) => showTerms(data, uid));
+    }
+
     if (e.target.id.includes('delete-category')) {
       const [, firebaseKey] = e.target.id.split('--');
       // const termTitle = document.querySelector(`#term-title-${firebaseKey}`).innerHTML;
       // eslint-disable-next-line no-alert
       if (window.confirm('Delete from collection?')) {
-        deleteFullCategory(firebaseKey, uid);
+        deleteFullCategory(firebaseKey, uid).then(() => {
+          document.body.id = 'categories..az..all..';
+          getCategories(uid).then((data) => showCategories(data, uid));
+        });
       }
     }
   });

@@ -1,4 +1,7 @@
+import { brandNewCategory, getCategories } from '../api/mergedCalls';
 import { createTerm, getTerms, updateTerm } from '../api/terms';
+import { createUserCategory, updateUserCategory } from '../api/userCategories';
+import showCategories from '../pages/categoriesDisplay';
 import showTerms from '../pages/termsDisplay';
 
 const formEvents = (uid) => {
@@ -49,7 +52,30 @@ const formEvents = (uid) => {
     }
 
     if (e.target.id.includes('create-category')) {
-      console.warn('Creating term');
+      console.warn('Creating category');
+      brandNewCategory(uid).then(() => {
+        document.body.id = 'categories..az..all..';
+        getCategories(uid).then((data) => showCategories(data, uid));
+      });
+    }
+  });
+
+  document.querySelector('#aux-form-container').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (e.target.id.includes('select-new-category')) {
+      const payload = {
+        category_id: document.querySelector('#form-category').value,
+        uid
+      };
+
+      createUserCategory(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+        updateUserCategory(patchPayload).then(() => {
+          document.body.id = 'categories..az..all..';
+          getCategories(uid).then((data) => showCategories(data, uid));
+        });
+      });
     }
   });
 };

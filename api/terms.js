@@ -22,8 +22,8 @@ const getUserTerms = (uid) => new Promise((resolve, reject) => {
 
 const getTerms = async (uid) => {
   const [page, , , searched] = document.body.id.split('..');
-  const allTerms = await getUserTerms(page === 'community' ? '' : uid);
-  const specTerms = allTerms.filter((term) => term.uid === uid || term.public === true);
+  const allTerms = await getUserTerms(page === 'community' || page === 'new-category' ? '' : uid);
+  const specTerms = allTerms.filter((term) => term.uid === uid || term.public === 'true');
   if (searched) {
     return specTerms.filter((term) => term.term.toLowerCase().includes(searched)
       || term.definition.toLowerCase().includes(searched));

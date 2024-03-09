@@ -7,8 +7,8 @@ const addCategoryForm = (uid) => {
   const formHTML = `
     <form id="create-category" class="add-category">
       <div class="mb-3">
-        <label for="term" class="form-label">Enter Category Name</label>
-        <input type="text" class="form-control" id="category" aria-describedby="categoryHelp" required>
+        <label for="new-category" class="form-label">Enter Category Name</label>
+        <input type="text" class="form-control" id="new-category" aria-describedby="categoryHelp" required>
       </div>
       <button type="submit" class="btn btn-success">Submit</button>
     </form>`;

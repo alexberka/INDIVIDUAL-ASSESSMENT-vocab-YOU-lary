@@ -38,6 +38,32 @@ const getUserCategoriesByCategory = (categoryId) => new Promise((resolve, reject
     .catch(reject);
 });
 
+const createUserCategory = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/user-categories.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const updateUserCategory = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/user-categories/${payload.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 const deleteUserCategory = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/user-categories/${firebaseKey}.json`, {
     method: 'DELETE',
@@ -50,4 +76,6 @@ const deleteUserCategory = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getUserCategories, getUserCategoriesByCategory, deleteUserCategory };
+export {
+  getUserCategories, getUserCategoriesByCategory, createUserCategory, updateUserCategory, deleteUserCategory
+};
